@@ -1,0 +1,9 @@
+.alert {
+    background-color: #4caf50; /* Green background */
+    color: white; /* White text */
+    padding: 10px; /* Padding */
+    text-align: center; /* Center align text */
+    margin-top: 10px; /* Margin from the top */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
