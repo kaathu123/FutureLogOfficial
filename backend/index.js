@@ -790,11 +790,13 @@ app.post("/complaint", async (req, res) => {
 });
 
 //ComplaintReply
-app.post("/complaintreply", async (req, res) => {
-  const { reply, id } = req.body;
+app.put("/Reply", async (req, res) => {
+  
   try {
-    Complaint.findByIdAndUpdate(id, { reply }, { new: true });
-    res.json({ message: "Updated" });
+    const { id, reply } = req.body;
+    const updatedComplaint = await Complaint.findByIdAndUpdate(id, { reply }, { new: true });
+    console.log(updatedComplaint); 
+    res.json({ message: "Updated", updatedComplaint });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

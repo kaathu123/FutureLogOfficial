@@ -11,19 +11,17 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 const ComplaintReply= () => {
   let { id } = useParams();
-  
   const [reply, setReply] = useState("");
   const handleSubmit = () => {
 
-   console.log('hello');
     const postData = {
       reply,
       id 
     };
     axios
-    .post("http://localhost:5000/complaintreply", postData)
+    .put(`http://localhost:5000/Reply`, postData)
     .then((response) => {
-      console.log(response.data);
+      console.log(response.data.updatedComplaint);
       setReply("");
     })
     .catch((error) => {
@@ -62,7 +60,8 @@ const ComplaintReply= () => {
           onChange={(event)=>setReply(event.target.value)}
 
           />
-          <Button onClick={handleSubmit} variant="contained" >Send</Button>
+         
+          <Button onClick={handleSubmit} variant="contained" >Send Reply</Button>
           </Stack>
         </Box>
       </Card>

@@ -56,7 +56,7 @@ function App() {
               <Route path="/college" element={<College />} />
               <Route path="/agent" element={<Agent />} />
               <Route path="/ComplaintView" element={<ComplaintView/>}/>
-              <Route path="/ComplaintReply" element={<ComplaintReply/>}/>
+              <Route path="/ComplaintReply/:id" element={<ComplaintReply/>}/>
 
             </Routes>
           </Card>

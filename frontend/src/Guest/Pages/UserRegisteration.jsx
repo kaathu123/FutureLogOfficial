@@ -53,13 +53,16 @@ const User = () => {
     if (!name.trim()) errors.name = "Name is required";
     if (!email.trim()) errors.email = "Email is required";
     if (!phone.trim()) errors.phone = "Phone is required";
+    else if (!/^\d{10}$/.test(phone.trim())) errors.phone = "Phone number must be 10 digits";
     if (!address.trim()) errors.address = "Address is required";
     if (!pincode.trim()) errors.pincode = "PinCode is required";
+    else if (!/^\d{6}$/.test(pincode.trim())) errors.pincode = "PIN code must be 6 digits";
     if (!password.trim()) errors.password = "Password is required";
-
+    else if (password.trim().length < 8) errors.password = "Password must be at least 8 characters long";
+  
     setErrors(errors); // Update the state with the errors
     return Object.keys(errors).length === 0; // Return true if there are no errors
-  };
+  }
 
   const fetchPlace = (Id) => {
     axios
