@@ -136,15 +136,18 @@ const Sidebar = () => {
               <NotificationsNoneIcon className="icon" />
               <span>Notifications</span>
             </li>
+            <Link to="/admin/ComplaintView" style={{ textDecoration: "none" }}>
+          
             <li>
               <PsychologyOutlinedIcon className="icon" />
-              <span>Logs</span>
+              <span>View Complaint</span>
             </li>
+            </Link>
             <li>
               <SettingsApplicationsIcon className="icon" />
               <span>Settings</span>
             </li>
-            <Link to="/admin/Myprofile" style={{ textDecoration: "none" }}>
+            <Link to="/admin/adminprofile" style={{ textDecoration: "none" }}>
               <li>
                 <AccountCircleOutlinedIcon className="icon" />
                 <span>Profile</span>

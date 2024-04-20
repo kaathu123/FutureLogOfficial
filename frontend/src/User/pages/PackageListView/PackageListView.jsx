@@ -10,19 +10,21 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const PackageListView = () => {
+  const {Id} = useParams()
   const [packageListData, setPackageListData] = useState([]);
   const navigate = useNavigate();
-  const fetchPackageList = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/Package");
-      setPackageListData(response.data.packages);
-    } catch (error) {
-      console.error("Error fetching accepted applications:", error);
-    }
-  };
+  const fetchPackageList = () => {
+    axios.get(`http://localhost:5000/Package/${Id}`).then((response) => {
+      console.log(response.data.packages);
+      setPackageListData(response.data.packages)
+    })
+    .catch((error) => {
+      console.error('Error fetching  data:', error);
+    });
+  }
 
   useEffect(() => {
     fetchPackageList();
@@ -78,6 +80,9 @@ const PackageListView = () => {
                   </Typography>
                   <Typography color="textPrimary" component="div">
                     {packages.price}
+                  </Typography>
+                  <Typography color="textPrimary" component="div">
+                    <p>Contact {packages.agencyId.phone}</p>
                   </Typography>
                 </CardContent>
               </Box>

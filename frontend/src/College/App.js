@@ -43,7 +43,7 @@ function App() {
               <Route path="/CollegeCourse" element={<CollegeCourse />} />
               <Route path="/Application" element={<UserApplications />} />
               <Route path="/Status" element={<Status />} />
-              <Route path="/ViewMore" element={<ViewMore />} />
+              <Route path="/ViewMore/:Id" element={<ViewMore />} />
               <Route path="/Accepted" element={<AcceptedList />} />
               <Route path="/Rejected" element={<RejectedList />} />
             </Routes>

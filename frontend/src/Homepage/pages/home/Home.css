@@ -1,0 +1,24 @@
+.homeContainer{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  background-color: rgb(184, 177, 185);
+}
+
+.homeTitle{
+  width: 1024px;
+  font-size: 20px;
+}
+.homeContainer {
+  /* Your existing styles for the home container */
+  /* Set background image */
+  background-image: url('https://img.freepik.com/free-vector/white-blurred-background_1034-249.jpg?w=740&t=st=1713278316~exp=1713278916~hmac=dd9d2bb339b5b930b7ecf658802b3196b73473e5bcaafdc4f9532904c5058c3c');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  /* Apply blur effect */
+  backdrop-filter: blur(10px); /* Adjust the blur radius as needed */
+}

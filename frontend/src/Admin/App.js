@@ -16,6 +16,8 @@ import Qualification from "./Pages/Qualification";
 import Appplicant from './Pages/UserView'
 import College from './Pages/CollegeView'
 import Agent from './Pages/AgentView'
+import ComplaintView from './Pages/ViewComplaint'
+import ComplaintReply from './Pages/ComplaintReply'
 
 
 const styles = {
@@ -53,6 +55,8 @@ function App() {
               <Route path="/appplicant" element={<Appplicant />} />
               <Route path="/college" element={<College />} />
               <Route path="/agent" element={<Agent />} />
+              <Route path="/ComplaintView" element={<ComplaintView/>}/>
+              <Route path="/ComplaintReply" element={<ComplaintReply/>}/>
 
             </Routes>
           </Card>

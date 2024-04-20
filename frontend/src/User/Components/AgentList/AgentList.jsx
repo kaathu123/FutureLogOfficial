@@ -28,8 +28,8 @@ const AgentList = () => {
     fetchAgentList();
   }, []);
 
-  const handleViewClick = () => {
-    navigate("/User/PackageList");
+  const handleViewClick = (Id) => {
+    navigate(`/User/PackageList/${Id}`);
   };
 
   return (
@@ -93,7 +93,7 @@ const AgentList = () => {
                       backgroundColor: "black",
                     },
                   }}
-                  onClick={handleViewClick}
+                  onClick={() => handleViewClick(agent._id)}
                 >
                   View
                 </Button>

@@ -46,6 +46,8 @@ const Application = () => {
   const [districtData, setDistrictData] = useState([]);
   const [qualData, setQualData] = useState([]);
   const [applicationId, setApplicationId] = useState("");
+  const Uid= sessionStorage.getItem('uId')
+
 
   const fetchPlace = (Id) => {
     axios
@@ -119,6 +121,7 @@ const Application = () => {
     formData.append("proof", proof);
     formData.append("placeId", placeId);
     formData.append("qualId", qualId);
+    formData.append("userId", Uid);
   
     axios
       .post(`http://localhost:5000/CourseBooking`, formData)

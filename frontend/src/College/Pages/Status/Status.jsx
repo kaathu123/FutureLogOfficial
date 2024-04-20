@@ -11,7 +11,7 @@ const Status = () => {
 
   const fetchCourseBooking = () => {
     axios
-      .get("http://localhost:5000/CourseBooking")
+      .get("http://localhost:5000/CourseBooking/")
       .then((response) => {
         console.log(response.data.coursebookings);
         setDisplayApplicationData(response.data.coursebookings);
@@ -51,8 +51,8 @@ const Status = () => {
       field: "viewMore",
       headerName: "View More",
       width: 130,
-      renderCell: () => {
-        return <a href={`/College/ViewMore`}>View More</a>;
+      renderCell: (Id) => {
+        return <a href={`/College/ViewMore/${Id.row.value}`}>View More</a>;
       },
     },
     {

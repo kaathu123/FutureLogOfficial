@@ -199,13 +199,20 @@ app.get("/Course", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-// app.get("/Course/:Id",async (req,res)=>{
-//   try{
-//     const Id=req.params.Id;
-//     const courses= await Course.find({categoryId:Id})
-//   }
-// }
-// )
+app.get("/Course/:Id",async (req, res)=>{
+  try{
+    const Id=req.params.Id;
+    const courses= await Course.find({categoryId:Id})
+    console.log("courses is successfully retived", courses);
+    res.json({ courses });
+  }
+  catch (error) {
+    console.error("Error retrieving places:", error);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
+)
 
 app.delete("/Course/:Id", async (req, res) => {
   try {
@@ -799,7 +806,7 @@ app.get("/complaint", async (req, res) => {
   try {
     const complaints = await Complaint.find().populate("userId").exec();
     console.log("successfully retrived", complaints);
-    res.json(complaints);
+    res.json({complaints});
   } catch (error) {
     console.error("error", error);
     res.status(500).send("internal server error");
@@ -910,6 +917,11 @@ const coursebookingSchemaStructure = new mongoose.Schema({
     enum: [0, 1, 2],
     default: 1,
   },
+  userId:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  }
 });
 const Coursebooking = mongoose.model(
   "coursebooking",
@@ -933,6 +945,7 @@ app.post(
       guardianPhone,
       placeId,
       qualId,
+      userId
     } = req.body;
     try {
       let newcoursebooking = new Coursebooking({
@@ -946,6 +959,7 @@ app.post(
         proof: proofimgsrc,
         placeId,
         qualId,
+        userId
       });
 
       await newcoursebooking.save();
@@ -1194,13 +1208,14 @@ app.post(
     try {
       var fileValue = JSON.parse(JSON.stringify(req.files));
       var photoimgsrc = `http://127.0.0.1:${port}/images/packagesImages/${fileValue.photo[0].filename}`;
-      const { packagename, details, price } = req.body;
+      const { packagename, details, price,agencyId } = req.body;
       console.log(req.body);
       let newpackage = new Package({
         packagename: packagename,
         details: details,
         price: price,
         photo: photoimgsrc,
+        agencyId
       });
       await newpackage.save();
       res.json({ message: "Packages Inset Successfully" });
@@ -1211,10 +1226,12 @@ app.post(
   }
 );
 
-//package populate
-app.get("/Package", async (req, res) => {
+//package populatePackage
+app.get("/Package/:Id", async (req, res) => {
   try {
-    const packages = await Package.find().populate("agencyId");
+    const Id = req.params.Id;
+    const packages = await Package.find({agencyId:Id})
+    .populate("agencyId")
     console.log("retrived successfully", packages);
     res.json({ packages });
   } catch (error) {

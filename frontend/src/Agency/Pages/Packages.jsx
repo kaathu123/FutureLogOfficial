@@ -42,6 +42,7 @@ const Packages = () => {
   const [packagePrice, setPackagePrice] = useState("");
   const [packagePhoto, setPackagePhoto] = useState(null);
   const [packageData, setPackageData] = useState([]);
+  const Aid = sessionStorage.getItem('gId')
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -50,6 +51,7 @@ const Packages = () => {
     formData.append("details", packageDetails);
     formData.append("price", packagePrice);
     formData.append("photo", packagePhoto);
+    formData.append("agencyId", Aid);
 
     axios
       .post("http://localhost:5000/Package", formData)
