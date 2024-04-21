@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import anime from "animejs";
 import { Button } from "@mui/material";
 import PaymentIcon from "@mui/icons-material/Payment";
+import './Payment.css'
 
-export default function PaymentFunction() {
+export default function Payment() {
   const [cardNumber, setCardNumber] = useState("0000 0000 0000 0000");
   const [cardHolderName, setCardHolderName] = useState("");
   const [cardExpirationDate, setCardExpirationDate] = useState("");

@@ -9,6 +9,7 @@ import RequestPage from "./pages/RequestPage/RequestPage";
 import BookingView from "./pages/BookingView/BookingView";
 import Editprofile from "./pages/EditProfile";
 import Compliant from "./pages/Compliant";
+import Payment from "./pages/payment/Payment";
 
 
 function App()
@@ -25,6 +26,7 @@ function App()
       <Route path="/bookingView" element={<BookingView/>} />
       <Route path="/editprofile" element={<Editprofile/>} />
       <Route path="/Compliant" element={<Compliant/>} />
+      <Route path="/Payment" element={<Payment/>} />
     </Routes>
   )
 }
