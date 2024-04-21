@@ -48,8 +48,8 @@ const Collegecourse = () => {
     });
   }
   
-  const fetchCourse = (Id) => {
-    axios.get(`http://localhost:5000/Course/${Id}`).then((response) => {
+  const fetchCourse = () => {
+    axios.get(`http://localhost:5000/Course`).then((response) => {
       console.log(response.data.courses);
       setCourseData(response.data.courses)
     })
@@ -74,7 +74,8 @@ const Collegecourse = () => {
           height: "500vh",
           flexDirection: "column",
         }}
-        component={'form'} onSubmit={handleSubmit}
+        component={'form'}
+         onSubmit={handleSubmit}
       >
         <Box
           sx={{

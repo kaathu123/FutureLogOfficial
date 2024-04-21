@@ -56,7 +56,7 @@ function App() {
               <Route path="/agency" element={<Agency />} />
               <Route path="/package" element={<Package />} />
               <Route path="/agentResponse" element={<AgentResponse />} />
-              <Route path="/viewMore" element={<ViewMore/>} />
+              <Route path="/viewMore/:Vid" element={<ViewMore/>} />
               <Route path="/timeSlot" element={<TimeSlot/>} />
               <Route path="/changePassword" element={<ChangePassword/>} />
               

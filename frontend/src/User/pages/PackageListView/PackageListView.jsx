@@ -33,8 +33,8 @@ const PackageListView = () => {
   const handleViewClick = () => {
     navigate("/User/AgentList");
   };
-  const handleRequestClick = () => {
-    navigate("/User/RequestPage");
+  const handleRequestClick = (id) => {
+    navigate(`/User/RequestPage/${id}`);
   };
 
   return (
@@ -113,7 +113,7 @@ const PackageListView = () => {
                       backgroundColor: "black",
                     },
                   }}
-                  onClick={handleRequestClick}
+                  onClick={() => handleRequestClick(packages._id)}
                 >
                   Request
                 </Button>

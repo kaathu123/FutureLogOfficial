@@ -17,6 +17,7 @@ import {
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import axios from "axios";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -31,6 +32,8 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const Application = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [districtId, setDistrictId] = useState("");
@@ -141,6 +144,8 @@ const Application = () => {
         fetchPlace(districtId);
         fetchDistrict();
         fetchQual();
+        alert('Application Submited')
+        navigate(`/User/`);
       })
       .catch((error) => {
         console.error("Error sending POST request:", error);

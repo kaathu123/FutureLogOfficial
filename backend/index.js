@@ -9,12 +9,14 @@ const bodyParser = require("body-parser");
 const { log, timeStamp } = require("console");
 const { type } = require("os");
 
-const db = "mongodb+srv://KMern:KMern@futurelog.m0vfu3h.mongodb.net/futureLog";
+// const db = "mongodb+srv://KMern:KMern@futurelog.m0vfu3h.mongodb.net/futureLog";
+const db = "mongodb+srv://futurelog123:futurelog123@cluster0.bm56oys.mongodb.net/futureLog";
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./public"));
+
 
 //Multer Storage Config
 const PATH = "./public/images/Images";
@@ -187,13 +189,9 @@ app.post("/Course", async (req, res) => {
 //popoluate-course
 app.get("/Course", async (req, res) => {
   try {
-    const courses = await Course.find().populate("categoryId");
-    console.log("successfully inserted", courses);
-    if (courses.length !== 0) {
+    const courses = await Course.find()
       res.json({ courses });
-    } else {
-      res.json({ courses: null });
-    }
+    
   } catch (error) {
     console.error("Error", error);
     res.status(500).send("Internal Server Error");
@@ -456,8 +454,8 @@ app.post(
   async (req, res) => {
     try {
       var fileValue = JSON.parse(JSON.stringify(req.files));
-      var photoimgsrc = `http://127.0.0.1:${port}/images/CollegeImages/${fileValue.collegePhoto[0].filename}`;
-      var proofimgsrc = `http://127.0.0.1:${port}/images/ProofImages/${fileValue.collegeProof[0].filename}`;
+      var photoimgsrc = `http://127.0.0.1:${port}/Images/Images/${fileValue.collegePhoto[0].filename}`;
+      var proofimgsrc = `http://127.0.0.1:${port}/Images/Images/${fileValue.collegeProof[0].filename}`;
       const {
         collegename,
         email,
@@ -560,8 +558,8 @@ app.post(
   async (req, res) => {
     console.log(req.body);
     var fileValue = JSON.parse(JSON.stringify(req.files));
-    var photoimgsrc = `http://127.0.0.1:${port}/images/UserImages/${fileValue.userPhoto[0].filename}`;
-    var proofimgsrc = `http://127.0.0.1:${port}/images/ProofImages/${fileValue.userProof[0].filename}`;
+    var photoimgsrc = `http://127.0.0.1:${port}/Images/Images/${fileValue.userPhoto[0].filename}`;
+    var proofimgsrc = `http://127.0.0.1:${port}/Images/Images/${fileValue.userProof[0].filename}`;
     const {
       username,
       useremail,
@@ -936,7 +934,7 @@ app.post(
   upload.fields([{ name: "proof", maxCount: 1 }]),
   async (req, res) => {
     var fileValue = JSON.parse(JSON.stringify(req.files));
-    var proofimgsrc = `http://127.0.0.1:${port}/images/ProofImages/${fileValue.proof[0].filename}`;
+    var proofimgsrc = `http://127.0.0.1:${port}/Images/Images/${fileValue.proof[0].filename}`;
     const {
       name,
       address,
@@ -977,7 +975,7 @@ app.post(
 app.get("/CourseBooking", async (req, res) => {
   console.log(req.body);
   try {
-    const coursebookings = await Coursebooking.find()
+    const coursebookings = await Coursebooking.find({coursebookingstatus:0})
       .populate("placeId")
       .exec();
     console.log("successfully retrived", coursebookings);
@@ -987,6 +985,22 @@ app.get("/CourseBooking", async (req, res) => {
     res.status(500).send("internal server error");
   }
 });
+
+//coursebooking populate
+app.get("/CourseBooking/:Id", async (req, res) => {
+  console.log(req.body);
+  try {
+    const coursebookings = await Coursebooking.find({_id:req.params.Id})
+      .populate("placeId")
+      .exec();
+    console.log("successfully retrived", coursebookings);
+    res.json({ coursebookings });
+  } catch (error) {
+    console.error("error", error);
+    res.status(500).send("internal server error");
+  }
+});
+
 
 // Accept application route
 app.put("/CourseBooking/:id/accept", async (req, res) => {
@@ -1106,8 +1120,8 @@ app.post(
   async (req, res) => {
     console.log(req.body);
     var fileValue = JSON.parse(JSON.stringify(req.files));
-    var photoimgsrc = `http://127.0.0.1:${port}/images/agencyImages/${fileValue.agentPhoto[0].filename}`;
-    var proofimgsrc = `http://127.0.0.1:${port}/images/ProofImages/${fileValue.agentProof[0].filename}`;
+    var photoimgsrc = `http://127.0.0.1:${port}/Images/Images/${fileValue.agentPhoto[0].filename}`;
+    var proofimgsrc = `http://127.0.0.1:${port}/Images/Images/${fileValue.agentProof[0].filename}`;
     const {
       agencyname,
       email,
@@ -1209,7 +1223,7 @@ app.post(
   async (req, res) => {
     try {
       var fileValue = JSON.parse(JSON.stringify(req.files));
-      var photoimgsrc = `http://127.0.0.1:${port}/images/packagesImages/${fileValue.photo[0].filename}`;
+      var photoimgsrc = `http://127.0.0.1:${port}/Images/Images/${fileValue.photo[0].filename}`;
       const { packagename, details, price,agencyId } = req.body;
       console.log(req.body);
       let newpackage = new Package({
@@ -1305,7 +1319,7 @@ app.post(
   upload.fields([{ name: "proof", maxCount: 1 }]),
   async (req, res) => {
     var fileValue = JSON.parse(JSON.stringify(req.files));
-    var proofimgsrc = `http://127.0.0.1:${port}/images/ProofImages/P${fileValue.proof[0].filename}`;
+    var proofimgsrc = `http://127.0.0.1:${port}/Images/Images/${fileValue.proof[0].filename}`;
     console.log(req.body);
     const {
       name,
@@ -1357,6 +1371,23 @@ app.get("/Request", async (req, res) => {
     res.status(500).send("internal server error");
   }
 });
+
+
+app.get("/Request/:Id", async (req, res) => {
+  try {
+    const requests = await Request.find({_id:req.params.Id})
+      .populate("placeId")
+      .populate("packageId")
+      .populate("qualId")
+  
+    console.log("Retrived successfully", requests);
+    res.json({ requests });
+  } catch (error) {
+    console.error("error", error);
+    res.status(500).send("internal server error");
+  }
+});
+
 
 //Time Slot
 app.get("/Slot", async (req, res) => {

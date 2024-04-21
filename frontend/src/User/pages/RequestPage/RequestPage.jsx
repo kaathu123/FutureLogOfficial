@@ -17,6 +17,7 @@ import {
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import axios from "axios";
 import styled from "@emotion/styled";
+import { useNavigate, useParams } from "react-router-dom";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -31,19 +32,20 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const RequestPage = () => {
+  const {pId} = useParams()
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [proof, setProof] = useState("");
-  const [packageId, setPackageId] = useState("");
   const [placeId, setPlaceId] = useState("");
   const [qualId, setQualId] = useState("");
   const [districtId, setDistrictId] = useState("");
   const [placeData, setPlaceData] = useState([]);
   const [districtData, setDistrictData] = useState([]);
-  const [packageData, setPackageData] = useState([]);
   const [qualData, setQualData] = useState([]);
   const [applicationId, setApplicationId] = useState("");
 
@@ -82,22 +84,11 @@ const RequestPage = () => {
       });
   };
 
-  const fetchPackages = () => {
-    axios
-      .get(`http://localhost:5000/Package`)
-      .then((response) => {
-        console.log(response.data.packages);
-        setPackageData(response.data.packages);
-      })
-      .catch((error) => {
-        console.error("Error fetching district data:", error);
-      });
-  };
+ 
 
   useEffect(() => {
     fetchDistrict();
     fetchQual();
-    fetchPackages();
   }, []);
 
   useEffect(() => {
@@ -126,7 +117,7 @@ const RequestPage = () => {
     formData.append("email", email);
     formData.append("description", description);
     formData.append("proof", proof);
-    formData.append("packageId", packageId);
+    formData.append("packageId", pId);
     formData.append("placeId", placeId);
     formData.append("qualId", qualId);
 
@@ -141,14 +132,15 @@ const RequestPage = () => {
         setEmail("");
         setDescription("");
         setProof("");
-        setPackageId("");
         setPlaceId("");
         setQualId("");
         setDistrictId("");
         fetchPlace(districtId);
         fetchDistrict();
         fetchQual();
-        fetchPackages();
+        alert('Request Submited')
+        navigate(`/User/`);
+
       })
       .catch((error) => {
         console.error("Error sending POST request:", error);
@@ -285,26 +277,7 @@ const RequestPage = () => {
                       </Select>
                     </FormControl>
                     <Stack spacing={3} direction={"column"} sx={{ m: 4 }}>
-                      <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">
-                          Package
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          label="Course Booking"
-                          onChange={(event) => {
-                            setPackageId(event.target.value);
-                          }}
-                          value={packageId}
-                        >
-                          {packageData.map((packages, key) => (
-                            <MenuItem key={key} value={packages._id}>
-                              {packages.packagename}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
+                    
                        <Button
                       className="Proof"
                       component="label"

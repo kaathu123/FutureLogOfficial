@@ -21,7 +21,7 @@ function App()
       <Route path="/Application" element={<Application/>}/> 
       <Route path="/AgentList" element={<AgentList/>}/> 
       <Route path="/PackageList/:Id" element={<PackgeListView/>}/> 
-      <Route path="/RequestPage" element={<RequestPage/>}/> 
+      <Route path="/RequestPage/:pId" element={<RequestPage/>}/> 
       <Route path="/bookingView" element={<BookingView/>} />
       <Route path="/editprofile" element={<Editprofile/>} />
       <Route path="/Compliant" element={<Compliant/>} />

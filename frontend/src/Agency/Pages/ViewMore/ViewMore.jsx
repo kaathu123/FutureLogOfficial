@@ -8,14 +8,18 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 const ViewMore = () => {
+  const {Vid} = useParams()
+  console.log(Vid);
   const [applicationId, setApplicationId] = useState("");
   const [displayResonsesData, setDisplayResponsesData] = useState([]);
   const fetchResponses = () => {
     axios
-      .get("http://localhost:5000/Request")
+      .get(`http://localhost:5000/Request/${Vid}`)
       .then((response) => {
+        console.log(response.data);
         setDisplayResponsesData(response.data.requests);
       })
       .catch((error) => {

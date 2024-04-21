@@ -53,8 +53,8 @@ const AgentResponse = () => {
       field: "viewMore",
       headerName: "View More",
       width: 130,
-      renderCell: () => {
-        return <a href={`/Agent/ViewMore`}>View More</a>;
+      renderCell: (params) => {
+        return <a href={`/Agent/ViewMore/${params.row.value}`}>View More</a>;
       },
     },
     {

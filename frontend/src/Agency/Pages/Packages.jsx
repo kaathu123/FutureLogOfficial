@@ -42,7 +42,7 @@ const Packages = () => {
   const [packagePrice, setPackagePrice] = useState("");
   const [packagePhoto, setPackagePhoto] = useState(null);
   const [packageData, setPackageData] = useState([]);
-  const Aid = sessionStorage.getItem('gId')
+  const Aid = sessionStorage.getItem("gId");
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -70,7 +70,7 @@ const Packages = () => {
 
   const fetchPackages = () => {
     axios
-      .get("http://localhost:5000/Package")
+      .get(`http://localhost:5000/Package/${Aid}`)
       .then((response) => {
         setPackageData(response.data.packages);
         console.log(response.data.packages);
@@ -111,11 +111,13 @@ const Packages = () => {
       headerName: "Package Photo",
       flex: 3,
       renderCell: (params) => (
-        <img
-          src={params.value}
-          alt="Package"
-          style={{ width: "100%", height: "auto" }}
-        />
+        <a href={params.row.packagePhoto}>
+          <img
+            src={params.row.packagePhoto}
+            alt="Package"
+            style={{ width: "100px", height: "auto" }}
+          />
+        </a>
       ),
     },
     {
@@ -144,7 +146,7 @@ const Packages = () => {
         backgroundColor: "#282828",
         padding: "20px",
         color: "gray",
-        border:'3px solid red' 
+        border: "3px solid red",
       }}
     >
       <Card
@@ -166,7 +168,12 @@ const Packages = () => {
           <Stack spacing={3} direction={"column"} sx={{ m: 4 }}>
             <Typography
               variant="h3"
-              sx={{ m: 2, textAlign: "center", color: "black", fontSize:'65px' }}
+              sx={{
+                m: 2,
+                textAlign: "center",
+                color: "black",
+                fontSize: "65px",
+              }}
             >
               Packages
             </Typography>
@@ -203,7 +210,7 @@ const Packages = () => {
         </Box>
       </Card>
       {packageData && (
-        <Paper sx={{ width: "100%", my: 2 ,background:"darkgray"}}>
+        <Paper sx={{ width: "100%", my: 2, background: "darkgray" }}>
           <DataGrid
             rows={packageData.map((packages, index) => ({
               id: index + 1,
