@@ -13,9 +13,6 @@ import { useState } from "react";
 const Home = () => {
   return (  
     <div>
-      <Navbar/>
-      <SearchBar/>
-      <Header/>
       <div className="homeContainer">
         <h1 className="homeTitle">List Of Colleges</h1>
         <Featured/>

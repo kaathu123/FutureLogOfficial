@@ -11,7 +11,6 @@ const CourseView = () => {
   const {Id} = useParams()
   return (  
     <div>
-      <Header/>
       <div className="homeContainer">
         <h1 className="homeTitle">List of Courses</h1>
         <FeaturedProperties Id={Id}/>

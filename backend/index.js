@@ -498,6 +498,19 @@ app.get("/College", async (req, res) => {
   }
 });
 
+//populate college
+app.get("/fetchCollegeByPlace/:Id", async (req, res) => {
+  try {
+    const colleges = await College.find({placeId:req.params.Id})
+    console.log("Places is successfully retived", colleges);
+    res.json({ colleges });
+  } catch (error) {
+    console.error("Error retrieving places:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
 // ***********************************************************************************************************************************************
 
 //user Schema
@@ -979,6 +992,21 @@ app.get("/CourseBooking", async (req, res) => {
       .populate("placeId")
       .exec();
     console.log("successfully retrived", coursebookings);
+    res.json({ coursebookings });
+  } catch (error) {
+    console.error("error", error);
+    res.status(500).send("internal server error");
+  }
+});
+
+
+
+//coursebooking populate
+app.get("/CourseMyBooking/:ID", async (req, res) => {
+  console.log(req.body);
+  try {
+    const coursebookings = await Coursebooking.find({userId:req.params.ID})
+
     res.json({ coursebookings });
   } catch (error) {
     console.error("error", error);

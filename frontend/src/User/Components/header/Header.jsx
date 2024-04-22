@@ -14,8 +14,11 @@ const Header = ({ type }) => {
   const handleClick = async () => {
     navigate("/User/AgentList");
   };
+  const handleCollegeClick = async () => {
+    navigate("/User/CollegeList");
+  };
   const handleViewClick = async () => {
-    navigate("/User/bookingView");
+    navigate("/User/MyBooking");
   };
   const handleComplaintClick = async () => {
     navigate("/User/Compliant");
@@ -32,6 +35,10 @@ const Header = ({ type }) => {
           <div className="headerListItem active" onClick={handleClick}>
             <FontAwesomeIcon icon={faGraduationCap} />
             <span>Agent</span>
+          </div>
+          <div className="headerListItem active" onClick={handleCollegeClick}>
+            <FontAwesomeIcon icon={faGraduationCap} />
+            <span>College</span>
           </div>
           <div className="headerListItem active" onClick={handleViewClick}>
             <FontAwesomeIcon icon={faGraduationCap} />
