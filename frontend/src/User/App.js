@@ -9,7 +9,6 @@ import RequestPage from "./pages/RequestPage/RequestPage";
 import BookingView from "./pages/BookingView/BookingView";
 import Editprofile from "./pages/EditProfile";
 import Compliant from "./pages/Compliant";
-import Payment from "./pages/payment/Payment";
 import CollegeList from "./pages/CollegeList";
 import Navbar from "./Components/Navbar/Navbar";
 import Header from "./Components/header/Header";
@@ -32,7 +31,6 @@ function App() {
         <Route path="/bookingView" element={<BookingView />} />
         <Route path="/editprofile" element={<Editprofile />} />
         <Route path="/Compliant" element={<Compliant />} />
-        <Route path="/Payment" element={<Payment />} />
         <Route path="/CollegeList" element={<CollegeList />} />
         <Route path="/MyBooking" element={<MyBookings />} />
       </Routes>

@@ -84,6 +84,8 @@ const CollegeList = () => {
           justifyContent: "center",
           alignItems: "center",
           marginBottom: "50px",
+          m:5,
+          gap:3
         }}
       >
         <FormControl fullWidth>

@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 
 const MyBookings = () => {
@@ -43,6 +44,15 @@ const MyBookings = () => {
               <TableCell component="th" scope="row">
                 {Course.name}
               </TableCell>
+              {
+                Course.coursebookingstatus === 1 && <Link to={`/Payment/${Course._id}`}>Pay</Link>
+              }
+                {
+                Course.coursebookingstatus === 2 && 'Rejected'
+              }
+                 {
+                Course.coursebookingstatus === 3 &&' Payement Completed'
+              }
               {/* <TableCell align="right">{Course.calories}</TableCell>
               <TableCell align="right">{row.fat}</TableCell>
               <TableCell align="right">{row.carbs}</TableCell>

@@ -1062,6 +1062,25 @@ app.put("/CourseBooking/:id/reject", async (req, res) => {
   }
 });
 
+
+
+
+// Reject application route
+app.put("/CourseBookingPay/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Coursebooking.findByIdAndUpdate(
+      id,
+      { coursebookingstatus: 3 },
+      { new: true }
+    );
+    res.json({ message: "Application rejected successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error rejecting application" });
+  }
+});
+
 //Accepted List populate
 app.get("/AcceptedApplications", async (req, res) => {
   console.log(req.body);

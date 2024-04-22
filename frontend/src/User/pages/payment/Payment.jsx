@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import anime from "animejs";
 import { Button } from "@mui/material";
 import PaymentIcon from "@mui/icons-material/Payment";
-import './Payment.css'
+import "./Payment.css";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function Payment() {
+  const navigate = useNavigate();
+  const {Bid} = useParams()
   const [cardNumber, setCardNumber] = useState("0000 0000 0000 0000");
   const [cardHolderName, setCardHolderName] = useState("");
   const [cardExpirationDate, setCardExpirationDate] = useState("");
@@ -67,6 +71,12 @@ export default function Payment() {
   const setCVV = (e) => {
     const cardCVV = e.target.value;
     setCardCVV(cardCVV);
+  };
+
+  const handlePay = async () => {
+    const response = await axios.put(`http://localhost:5000/CourseBookingPay/${Bid}`);
+    alert('Payment Succesfully')
+    navigate("/User");
   };
 
   return (
@@ -151,7 +161,7 @@ export default function Payment() {
         </div>
       </form>
       <div>
-        <Button className="pay_btn">
+        <Button className="pay_btn" onClick={handlePay}>
           Click to Pay
           <PaymentIcon />
         </Button>
