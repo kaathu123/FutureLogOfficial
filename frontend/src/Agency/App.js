@@ -57,7 +57,7 @@ function App() {
               <Route path="/package" element={<Package />} />
               <Route path="/agentResponse" element={<AgentResponse />} />
               <Route path="/viewMore/:Vid" element={<ViewMore/>} />
-              <Route path="/timeSlot" element={<TimeSlot/>} />
+              <Route path="/timeSlot/:Id" element={<TimeSlot/>} />
               <Route path="/changePassword" element={<ChangePassword/>} />
               
             </Routes>

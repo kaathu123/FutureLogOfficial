@@ -26,7 +26,7 @@ const AgentResponse = () => {
         response = await axios.put(
           `http://localhost:5000/CourseBooking/${Id}/accept`
         );
-        navigate("/Agent/timeSlot");
+        navigate(`/Agent/timeSlot/${Id}`);
       } else if (action === "reject") {
         response = await axios.put(
           `http://localhost:5000/CourseBooking/${Id}/reject`

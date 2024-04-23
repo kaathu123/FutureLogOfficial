@@ -10,8 +10,10 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
+import { useParams } from "react-router-dom";
 
 const TimeSlot = () => {
+  const {Id} = useParams()
   const [bookSlot, setBookSlot] = useState("");
   const [bookSlotData, setBookSlotData] = useState(null);
 
@@ -28,7 +30,7 @@ const TimeSlot = () => {
     };
 
     axios
-      .put(`http://localhost:5000/Slot/${slotId}`, postData)
+      .put(`http://localhost:5000/Slot/${Id}`, postData)
       .then((response) => {
         console.log("Post request successful:", response.data);
         setBookSlot("");
@@ -93,7 +95,7 @@ const TimeSlot = () => {
           </Stack>
         </Box>
       </Card>
-      {bookSlotData && (
+      {/* {bookSlotData && (
         <Paper elevation={3} sx={{ width: "100%", mt: 2 }}>
           <DataGrid
             rows={bookSlotData.map((reserve, index) => ({
@@ -109,7 +111,7 @@ const TimeSlot = () => {
             disableRowSelectionOnClick
           />
         </Paper>
-      )}
+      )} */}
     </Box>
   );
 };

@@ -189,7 +189,7 @@ app.post("/Course", async (req, res) => {
 //popoluate-course
 app.get("/Course", async (req, res) => {
   try {
-    const courses = await Course.find()
+    const courses = await Course.find().populate('categoryId')
       res.json({ courses });
     
   } catch (error) {
@@ -927,8 +927,7 @@ const coursebookingSchemaStructure = new mongoose.Schema({
   },
   coursebookingstatus: {
     type: Number,
-    enum: [0, 1, 2],
-    default: 1,
+    default: 0,
   },
   userId:{
     type: mongoose.Schema.Types.ObjectId,
@@ -1351,8 +1350,7 @@ const requestSchemaStructure = new mongoose.Schema({
   },
   status: {
     type: Number,
-    enum: [0, 1, 2],
-    default: 1,
+    default: 0,
   },
   bookslot: {
     type: String,
